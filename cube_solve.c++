@@ -1,4 +1,5 @@
 #include<iostream>
+#include <windows.h>
 using namespace std;
 
 // up    => 0
@@ -95,7 +96,7 @@ void input(){
 }
 void output(){
     for(int i=0;i<3;i++){
-        cout<<"                      ";
+        cout<<"                ";
         for(int j=0;j<3;j++){
             if(up[i][j][0]=='U')
                 cout<<WHITE;
@@ -172,27 +173,27 @@ void output(){
         cout<<" ";
         for(int j=0;j<3;j++){
             // Handling 'back' direction
-            if (back[2-i][j][0] == 'U')
+            if (back[2-i][2-j][0] == 'U')
                 cout << WHITE;
-            if (back[2-i][j][0] == 'F')
+            if (back[2-i][2-j][0] == 'F')
                 cout << GREEN;
-            if (back[2-i][j][0] == 'D')
+            if (back[2-i][2-j][0] == 'D')
                 cout << YELLOW;
-            if (back[2-i][j][0] == 'B')
+            if (back[2-i][2-j][0] == 'B')
                 cout << BLUE;
-            if (back[2-i][j][0] == 'L')
+            if (back[2-i][2-j][0] == 'L')
                 cout << ORANGE;
-            if (back[2-i][j][0] == 'R')
+            if (back[2-i][2-j][0] == 'R')
                 cout << RED;
 
-            cout<<back[2-i][j]<<RESET<<" ";
+            cout<<back[2-i][2-j]<<RESET<<" ";
         }
         
         cout<<endl;
     }
     cout<<endl;
     for(int i=0;i<3;i++){
-        cout<<"                      ";
+        cout<<"                ";
         for(int j=0;j<3;j++){
             // Handling 'down' direction
             if (down[i][j][0] == 'U')
@@ -213,7 +214,7 @@ void output(){
     }
     cout<<endl;
     for(int i=0;i<3;i++){
-        cout<<"                      ";
+        cout<<"                ";
         for(int j=0;j<3;j++){
             // Handling 'back' direction
             if (back[i][j][0] == 'U')
@@ -499,13 +500,13 @@ void up_clockwise(){
     for(int i=0;i<3;i++){      
         front[0][i]=rightside2[0][i];
         leftside[0][i]=front2[0][i];
-        back[2][i]=leftside2[0][i];  
-        rightside[0][i]=back2[2][i];
+        back[2][2-i]=leftside2[0][i];  
+        rightside[0][i]=back2[2][2-i];
     }
     for(int i=0;i<3;i++){
         front2[0][i]=front[0][i];        
         leftside2[0][i]=leftside[0][i];
-        back2[2][i]=back[2][i];
+        back2[2][2-i]=back[2][2-i];
         rightside2[0][i]=rightside[0][i];
     }
     
@@ -530,14 +531,14 @@ void up_counter_clockwise(){
 
     for(int i=0;i<3;i++){      
         front[0][i]=leftside2[0][i];
-        leftside[0][i]=back2[2][i];
-        back[2][i]=rightside2[0][i];  
+        leftside[0][i]=back2[2][2-i];
+        back[2][2-i]=rightside2[0][i];  
         rightside[0][i]=front2[0][i];
     }
     for(int i=0;i<3;i++){
         front2[0][i]=front[0][i];        
         leftside2[0][i]=leftside[0][i];
-        back2[2][i]=back[2][i];
+        back2[2][2-i]=back[2][2-i];
         rightside2[0][i]=rightside[0][i];
     }
     
@@ -561,14 +562,14 @@ void down_clockwise(){
 
     for(int i=0;i<3;i++){      
         front[2][i]=leftside2[2][i];
-        leftside[2][i]=back2[0][i];
-        back[0][i]=rightside2[2][i];  
+        leftside[2][i]=back2[0][2-i];
+        back[0][2-i]=rightside2[2][i];  
         rightside[2][i]=front2[2][i];
     }
     for(int i=0;i<3;i++){
         front2[2][i]=front[2][i];        
         leftside2[2][i]=leftside[2][i];
-        back2[0][i]=back[0][i];
+        back2[0][2-i]=back[0][2-i];
         rightside2[2][i]=rightside[2][i];
     }
     
@@ -593,13 +594,13 @@ void down_counter_clockwise(){
     for(int i=0;i<3;i++){      
         front[2][i]=rightside2[2][i];
         leftside[2][i]=front2[2][i];
-        back[0][i]=leftside2[2][i];  
-        rightside[2][i]=back2[0][i];
+        back[0][2-i]=leftside2[2][i];  
+        rightside[2][i]=back2[0][2-i];
     }
     for(int i=0;i<3;i++){
         front2[2][i]=front[2][i];        
         leftside2[2][i]=leftside[2][i];
-        back2[0][i]=back[0][i];
+        back2[0][2-i]=back[0][2-i];
         rightside2[2][i]=rightside[2][i];
     }
     
@@ -622,67 +623,67 @@ int main(){
     input();
     output();
     int value;
+    
+    // while(cin>>value){
 
-    while(cin>>value){
-
-        switch (value)
-        {
-        case 1:
-            right_clockwise();
-            output();
-            break;
-        case 2:
-            right_counter_clockwise();
-            output();
-            break;
-        case 3:
-            left_clockwise();
-            output();
-            break;
-        case 4:
-            left_counter_clockwise();
-            output();
-            break;
-        case 5:
-            up_clockwise();
-            output();
-            break;
-        case 6:
-            up_counter_clockwise();
-            output();
-            break;
-        case 7:
-            down_clockwise();
-            output();
-            break;
-        case 8:
-            down_counter_clockwise();
-            output();
-            break;
-        case 9:
-            front_clockwise();
-            output();
-            break;
-        case 10:
-            front_counter_clockwise();
-            output();
-            break;
-        case 11:
-            back_clockwise();
-            output();
-            break;
-        case 12:
-            back_counter_clockwise();
-            output();
-            break;
-        // case 1:
-        //     right_clockwise();
-        //     break;
+    //     switch (value)
+    //     {
+    //     case 1:
+    //         right_clockwise();
+    //         output();
+    //         break;
+    //     case 2:
+    //         right_counter_clockwise();
+    //         output();
+    //         break;
+    //     case 3:
+    //         left_clockwise();
+    //         output();
+    //         break;
+    //     case 4:
+    //         left_counter_clockwise();
+    //         output();
+    //         break;
+    //     case 5:
+    //         up_clockwise();
+    //         output();
+    //         break;
+    //     case 6:
+    //         up_counter_clockwise();
+    //         output();
+    //         break;
+    //     case 7:
+    //         down_clockwise();
+    //         output();
+    //         break;
+    //     case 8:
+    //         down_counter_clockwise();
+    //         output();
+    //         break;
+    //     case 9:
+    //         front_clockwise();
+    //         output();
+    //         break;
+    //     case 10:
+    //         front_counter_clockwise();
+    //         output();
+    //         break;
+    //     case 11:
+    //         back_clockwise();
+    //         output();
+    //         break;
+    //     case 12:
+    //         back_counter_clockwise();
+    //         output();
+    //         break;
+    //     // case 1:
+    //     //     right_clockwise();
+    //     //     break;
         
-        default:
-            break;
-        }
-    }
+    //     default:
+    //         break;
+    //     }
+    // }
     /***************** */
     // left_clockwise();
     // output();
@@ -714,12 +715,17 @@ int main(){
     // output();
     // down_counter_clockwise();
     // output();
-    // for(int i=0;i<5;i++){
-    //     right_clockwise();
-    //     up_clockwise();
-    //     right_counter_clockwise();
-    //     up_clockwise();
-    // }
+    for(int i=0;i<6;i++){
+        right_clockwise();
+        output();
+        Sleep(1000);
+        up_clockwise();
+        output();Sleep(1000);
+        right_counter_clockwise();
+        output();Sleep(1000);
+        up_counter_clockwise();
+        output();
+    }
     // output();
-
+    
 }
